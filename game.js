@@ -224,7 +224,7 @@ class Fighter {
   constructor(opts) {
     this.id       = opts.id;        // 'p1' or 'p2'
     this.x        = opts.x;
-    this.y        = GROUND_Y;
+    this.y        = GROUND_Y - 90; // top of fighter; foot = y + h = GROUND_Y
     this.isAI     = opts.isAI || false;
     this.palette  = opts.palette;   // { body, accent, trim, eye }
     this.name     = opts.name;
@@ -336,11 +336,9 @@ class Fighter {
     }
     this.y += this.vy;
 
-    // Ground
-    if (this.y + this.h >= GROUND_Y + this.h) {
-      this.y = GROUND_Y - this.h + this.h; // snap
-      // Actually: fighter.y = foot position (top-left), ground is at GROUND_Y
-      this.y = GROUND_Y;
+    // Ground: y is top of fighter, foot = y + h, must not exceed GROUND_Y
+    if (this.y + this.h >= GROUND_Y) {
+      this.y = GROUND_Y - this.h;
       this.vy = 0;
       this.onGround = true;
     }
@@ -676,7 +674,7 @@ function drawFighter(f) {
   ctx.globalAlpha = shadowAlpha;
   ctx.fillStyle = '#000';
   ctx.beginPath();
-  ctx.ellipse(0, f.h * 0.5 + 4 - bob, 22, 6, 0, 0, Math.PI * 2);
+  ctx.ellipse(0, f.h + 2, 22, 6, 0, 0, Math.PI * 2);
   ctx.fill();
   ctx.restore();
 
@@ -1159,14 +1157,14 @@ function resetRound() {
   const p1 = gameState.p1, p2 = gameState.p2;
   p1.hp = p1.maxHp; p1.displayHp = p1.maxHp; p1.damageHp = p1.maxHp;
   p1.special = 0;
-  p1.x = 150; p1.y = GROUND_Y; p1.vx = 0; p1.vy = 0;
+  p1.x = 150; p1.y = GROUND_Y - p1.h; p1.vx = 0; p1.vy = 0;
   p1.state = 'idle'; p1.attackType = null;
   p1.attackCooldown = 0; p1.specialCooldown = 0;
   p1.facing = 1; p1.onGround = true;
 
   p2.hp = p2.maxHp; p2.displayHp = p2.maxHp; p2.damageHp = p2.maxHp;
   p2.special = 0;
-  p2.x = GAME_W - 150 - 52; p2.y = GROUND_Y; p2.vx = 0; p2.vy = 0;
+  p2.x = GAME_W - 150 - 52; p2.y = GROUND_Y - p2.h; p2.vx = 0; p2.vy = 0;
   p2.state = 'idle'; p2.attackType = null;
   p2.attackCooldown = 0; p2.specialCooldown = 0;
   p2.facing = -1; p2.onGround = true;
