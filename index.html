@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IRON FIST — Arcade Fighter</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- START MENU -->
+  <div id="startMenu" class="screen active">
+    <div class="menu-bg"></div>
+    <div class="menu-content">
+      <div class="game-logo">
+        <span class="logo-iron">IRON</span>
+        <span class="logo-fist">FIST</span>
+        <div class="logo-sub">ARCADE FIGHTER</div>
+      </div>
+      <div class="menu-buttons">
+        <button class="btn-arcade" id="btnStart">▶ PLAYER VS AI</button>
+        <button class="btn-arcade secondary" id="btnControls">⚙ CONTROLS</button>
+      </div>
+      <div class="menu-footer">Press ENTER or click to begin</div>
+    </div>
+  </div>
+
+  <!-- CONTROLS SCREEN -->
+  <div id="controlsScreen" class="screen">
+    <div class="menu-bg"></div>
+    <div class="menu-content">
+      <h2 class="controls-title">CONTROLS</h2>
+      <div class="controls-grid">
+        <div class="ctrl-section">
+          <h3>MOVEMENT</h3>
+          <div class="ctrl-row"><kbd>A</kbd> Move Left</div>
+          <div class="ctrl-row"><kbd>D</kbd> Move Right</div>
+          <div class="ctrl-row"><kbd>W</kbd> Jump</div>
+          <div class="ctrl-row"><kbd>S</kbd> Block</div>
+        </div>
+        <div class="ctrl-section">
+          <h3>ATTACKS</h3>
+          <div class="ctrl-row"><kbd>J</kbd> Light Punch</div>
+          <div class="ctrl-row"><kbd>K</kbd> Heavy Kick</div>
+          <div class="ctrl-row"><kbd>L</kbd> Special Attack</div>
+        </div>
+      </div>
+      <button class="btn-arcade secondary" id="btnBack">← BACK</button>
+    </div>
+  </div>
+
+  <!-- GAME SCREEN -->
+  <div id="gameScreen" class="screen">
+    <div id="hud">
+      <div class="hud-player" id="hudP1">
+        <div class="hud-name">P1 · KEN</div>
+        <div class="health-bar-wrap p1-wrap">
+          <div class="health-bar" id="hp1Bar"></div>
+          <div class="health-damage-bar" id="hp1Damage"></div>
+        </div>
+      </div>
+      <div class="hud-center">
+        <div class="round-wins" id="p1Wins">○ ○</div>
+        <div class="timer-box">
+          <div class="timer-label">TIME</div>
+          <div class="timer-value" id="timerDisplay">99</div>
+        </div>
+        <div class="round-wins" id="p2Wins">○ ○</div>
+      </div>
+      <div class="hud-player p2" id="hudP2">
+        <div class="hud-name">AI · RYU</div>
+        <div class="health-bar-wrap p2-wrap">
+          <div class="health-bar" id="hp2Bar"></div>
+          <div class="health-damage-bar" id="hp2Damage"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="canvasWrapper">
+      <canvas id="gameCanvas"></canvas>
+      <div id="roundAnnounce" class="round-announce hidden">
+        <div class="announce-round" id="announceRound">ROUND 1</div>
+        <div class="announce-fight" id="announceFight">FIGHT!</div>
+      </div>
+    </div>
+
+    <div id="specialBar">
+      <div class="special-label">SPECIAL</div>
+      <div class="special-meter-wrap">
+        <div class="special-meter" id="specialMeter"></div>
+      </div>
+      <div class="special-ready" id="specialReady">READY!</div>
+    </div>
+  </div>
+
+  <!-- PAUSE MENU -->
+  <div id="pauseMenu" class="screen overlay hidden">
+    <div class="pause-box">
+      <div class="pause-title">PAUSED</div>
+      <button class="btn-arcade" id="btnResume">▶ RESUME</button>
+      <button class="btn-arcade secondary" id="btnQuit">✕ QUIT</button>
+    </div>
+  </div>
+
+  <!-- VICTORY SCREEN -->
+  <div id="victoryScreen" class="screen overlay hidden">
+    <div class="victory-box">
+      <div class="victory-label" id="victoryLabel">PLAYER 1 WINS!</div>
+      <div class="victory-sub" id="victorySub">PERFECT VICTORY</div>
+      <div class="victory-scores" id="victoryScores"></div>
+      <button class="btn-arcade" id="btnRestart">↺ PLAY AGAIN</button>
+      <button class="btn-arcade secondary" id="btnMainMenu">⌂ MAIN MENU</button>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
